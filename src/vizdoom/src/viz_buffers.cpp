@@ -27,6 +27,9 @@
 #include "viz_depth.h"
 #include "viz_labels.h"
 #include "viz_main.h"
+#include "v_palette.h"
+
+extern int BlendR, BlendG, BlendB, BlendA;
 
 unsigned int vizScreenWidth, vizScreenHeight;
 size_t vizScreenPitch, vizScreenSize, vizScreenChannelSize;
@@ -230,10 +233,18 @@ void VIZ_CopyBuffer(BYTE *vizBuffer){
     if(screen == NULL) return;
 
     const BYTE *buffer = screen->GetBuffer();
-    PalEntry palette[256];
-    screen->GetFlashedPalette(palette);
+    PalEntry *basePalette = screen->GetPalette();
 
-    if(buffer == NULL) return;
+    if(buffer == NULL || basePalette == NULL) return;
+
+    // Apply the current screen blend (e.g., FadeTo effects) to the palette.
+    // Read blend state from the global variables set by V_SetBlend/V_ForceBlend
+    // rather than from screen->FlashAmount for consistent cross-instance results.
+    PalEntry palette[256];
+    memcpy(palette, basePalette, 256 * sizeof(PalEntry));
+    if (BlendA) {
+        DoBlending(palette, palette, 256, BlendR, BlendG, BlendB, BlendA);
+    }
 
     const unsigned int screenSize = screen->GetWidth() * screen->GetHeight();
     const unsigned int bufferPitch = screen->GetPitch();
