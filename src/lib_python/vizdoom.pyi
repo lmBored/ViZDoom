@@ -16,6 +16,7 @@ from numpy.typing import NDArray
 
 __all__: list[str] = [
     "ABGR32",
+    "ABGR32_FLASHED",
     "ACTIVATE_SELECTED_ITEM",
     "ALTATTACK",
     "ALTATTACK_READY",
@@ -31,6 +32,7 @@ __all__: list[str] = [
     "AMMO9",
     "ANGLE",
     "ARGB32",
+    "ARGB32_FLASHED",
     "ARMOR",
     "ASYNC_PLAYER",
     "ASYNC_SPECTATOR",
@@ -38,7 +40,9 @@ __all__: list[str] = [
     "ATTACK_READY",
     "AutomapMode",
     "BGR24",
+    "BGR24_FLASHED",
     "BGRA32",
+    "BGRA32_FLASHED",
     "BINARY_BUTTON_COUNT",
     "BUTTON_COUNT",
     "Button",
@@ -50,7 +54,9 @@ __all__: list[str] = [
     "CAMERA_POSITION_Z",
     "CAMERA_ROLL",
     "CBCGCR",
+    "CBCGCR_FLASHED",
     "CRCGCB",
+    "CRCGCB_FLASHED",
     "CROUCH",
     "DAMAGECOUNT",
     "DAMAGE_TAKEN",
@@ -68,6 +74,7 @@ __all__: list[str] = [
     "FRAGCOUNT",
     "FileDoesNotExistException",
     "GRAY8",
+    "GRAY8_FLASHED",
     "GameState",
     "GameVariable",
     "HEALTH",
@@ -161,7 +168,9 @@ __all__: list[str] = [
     "RES_800X500",
     "RES_800X600",
     "RGB24",
+    "RGB24_FLASHED",
     "RGBA32",
+    "RGBA32_FLASHED",
     "ROLL",
     "SECRETCOUNT",
     "SELECTED_WEAPON",
@@ -1837,8 +1846,9 @@ class DoomGame:
     def set_screen_format(self, format: ScreenFormat) -> None:
         """
         Sets the format of the screen buffer and the automap buffer.
-        Supported formats are defined in :class:`.ScreenFormat` enumeration type (e.g. ``CRCGCB``, ``RGB24``, ``GRAY8``).
+        Supported formats are defined in :class:`.ScreenFormat` enumeration type (e.g. ``CRCGCB``, ``RGB24``, ``GRAY8``, ``RGB24_FLASHED``).
         The format change affects only the buffers, so it will not have any effect on the content of ViZDoom's display window.
+        Formats with ``_FLASHED`` suffix apply active screen flash effects to buffer values.
 
         Default value: ``CRCGCB``
 
@@ -2653,23 +2663,68 @@ class ScreenFormat:
       GRAY8
 
       DOOM_256_COLORS8
+
+      CRCGCB_FLASHED
+
+      RGB24_FLASHED
+
+      RGBA32_FLASHED
+
+      ARGB32_FLASHED
+
+      CBCGCR_FLASHED
+
+      BGR24_FLASHED
+
+      BGRA32_FLASHED
+
+      ABGR32_FLASHED
+
+      GRAY8_FLASHED
     """
 
     ABGR32: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.ABGR32: 7>
+    ABGR32_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.ABGR32_FLASHED: 17>
     ARGB32: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.ARGB32: 3>
+    ARGB32_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.ARGB32_FLASHED: 13>
     BGR24: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.BGR24: 5>
+    BGR24_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.BGR24_FLASHED: 15>
     BGRA32: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.BGRA32: 6>
+    BGRA32_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.BGRA32_FLASHED: 16>
     CBCGCR: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.CBCGCR: 4>
+    CBCGCR_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.CBCGCR_FLASHED: 14>
     CRCGCB: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.CRCGCB: 0>
+    CRCGCB_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.CRCGCB_FLASHED: 10>
     DOOM_256_COLORS8: typing.ClassVar[
         ScreenFormat
     ]  # value = <ScreenFormat.DOOM_256_COLORS8: 9>
     GRAY8: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.GRAY8: 8>
+    GRAY8_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.GRAY8_FLASHED: 18>
     RGB24: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.RGB24: 1>
+    RGB24_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.RGB24_FLASHED: 11>
     RGBA32: typing.ClassVar[ScreenFormat]  # value = <ScreenFormat.RGBA32: 2>
+    RGBA32_FLASHED: typing.ClassVar[
+        ScreenFormat
+    ]  # value = <ScreenFormat.RGBA32_FLASHED: 12>
     __members__: typing.ClassVar[
         dict[str, ScreenFormat]
-    ]  # value = {'CRCGCB': <ScreenFormat.CRCGCB: 0>, 'RGB24': <ScreenFormat.RGB24: 1>, 'RGBA32': <ScreenFormat.RGBA32: 2>, 'ARGB32': <ScreenFormat.ARGB32: 3>, 'CBCGCR': <ScreenFormat.CBCGCR: 4>, 'BGR24': <ScreenFormat.BGR24: 5>, 'BGRA32': <ScreenFormat.BGRA32: 6>, 'ABGR32': <ScreenFormat.ABGR32: 7>, 'GRAY8': <ScreenFormat.GRAY8: 8>, 'DOOM_256_COLORS8': <ScreenFormat.DOOM_256_COLORS8: 9>}
+    ]  # value = {'CRCGCB': <ScreenFormat.CRCGCB: 0>, 'RGB24': <ScreenFormat.RGB24: 1>, 'RGBA32': <ScreenFormat.RGBA32: 2>, 'ARGB32': <ScreenFormat.ARGB32: 3>, 'CBCGCR': <ScreenFormat.CBCGCR: 4>, 'BGR24': <ScreenFormat.BGR24: 5>, 'BGRA32': <ScreenFormat.BGRA32: 6>, 'ABGR32': <ScreenFormat.ABGR32: 7>, 'GRAY8': <ScreenFormat.GRAY8: 8>, 'DOOM_256_COLORS8': <ScreenFormat.DOOM_256_COLORS8: 9>, 'CRCGCB_FLASHED': <ScreenFormat.CRCGCB_FLASHED: 10>, 'RGB24_FLASHED': <ScreenFormat.RGB24_FLASHED: 11>, 'RGBA32_FLASHED': <ScreenFormat.RGBA32_FLASHED: 12>, 'ARGB32_FLASHED': <ScreenFormat.ARGB32_FLASHED: 13>, 'CBCGCR_FLASHED': <ScreenFormat.CBCGCR_FLASHED: 14>, 'BGR24_FLASHED': <ScreenFormat.BGR24_FLASHED: 15>, 'BGRA32_FLASHED': <ScreenFormat.BGRA32_FLASHED: 16>, 'ABGR32_FLASHED': <ScreenFormat.ABGR32_FLASHED: 17>, 'GRAY8_FLASHED': <ScreenFormat.GRAY8_FLASHED: 18>}
     def __eq__(self, other: typing.Any) -> bool: ...
     def __getstate__(self) -> int: ...
     def __hash__(self) -> int: ...
@@ -3033,6 +3088,7 @@ def sec_to_doom_tics(
     """
 
 ABGR32: ScreenFormat  # value = <ScreenFormat.ABGR32: 7>
+ABGR32_FLASHED: ScreenFormat  # value = <ScreenFormat.ABGR32_FLASHED: 17>
 ACTIVATE_SELECTED_ITEM: Button  # value = <Button.ACTIVATE_SELECTED_ITEM: 34>
 ALTATTACK: Button  # value = <Button.ALTATTACK: 5>
 ALTATTACK_READY: GameVariable  # value = <GameVariable.ALTATTACK_READY: 14>
@@ -3048,13 +3104,16 @@ AMMO8: GameVariable  # value = <GameVariable.AMMO8: 25>
 AMMO9: GameVariable  # value = <GameVariable.AMMO9: 26>
 ANGLE: GameVariable  # value = <GameVariable.ANGLE: 40>
 ARGB32: ScreenFormat  # value = <ScreenFormat.ARGB32: 3>
+ARGB32_FLASHED: ScreenFormat  # value = <ScreenFormat.ARGB32_FLASHED: 13>
 ARMOR: GameVariable  # value = <GameVariable.ARMOR: 10>
 ASYNC_PLAYER: Mode  # value = <Mode.ASYNC_PLAYER: 2>
 ASYNC_SPECTATOR: Mode  # value = <Mode.ASYNC_SPECTATOR: 3>
 ATTACK: Button  # value = <Button.ATTACK: 0>
 ATTACK_READY: GameVariable  # value = <GameVariable.ATTACK_READY: 13>
 BGR24: ScreenFormat  # value = <ScreenFormat.BGR24: 5>
+BGR24_FLASHED: ScreenFormat  # value = <ScreenFormat.BGR24_FLASHED: 15>
 BGRA32: ScreenFormat  # value = <ScreenFormat.BGRA32: 6>
+BGRA32_FLASHED: ScreenFormat  # value = <ScreenFormat.BGRA32_FLASHED: 16>
 BINARY_BUTTON_COUNT: int = 38
 BUTTON_COUNT: int = 43
 CAMERA_ANGLE: GameVariable  # value = <GameVariable.CAMERA_ANGLE: 50>
@@ -3065,7 +3124,9 @@ CAMERA_POSITION_Y: GameVariable  # value = <GameVariable.CAMERA_POSITION_Y: 48>
 CAMERA_POSITION_Z: GameVariable  # value = <GameVariable.CAMERA_POSITION_Z: 49>
 CAMERA_ROLL: GameVariable  # value = <GameVariable.CAMERA_ROLL: 52>
 CBCGCR: ScreenFormat  # value = <ScreenFormat.CBCGCR: 4>
+CBCGCR_FLASHED: ScreenFormat  # value = <ScreenFormat.CBCGCR_FLASHED: 14>
 CRCGCB: ScreenFormat  # value = <ScreenFormat.CRCGCB: 0>
+CRCGCB_FLASHED: ScreenFormat  # value = <ScreenFormat.CRCGCB_FLASHED: 10>
 CROUCH: Button  # value = <Button.CROUCH: 3>
 DAMAGECOUNT: GameVariable  # value = <GameVariable.DAMAGECOUNT: 7>
 DAMAGE_TAKEN: GameVariable  # value = <GameVariable.DAMAGE_TAKEN: 8>
@@ -3081,6 +3142,7 @@ DROP_SELECTED_ITEM: Button  # value = <Button.DROP_SELECTED_ITEM: 37>
 DROP_SELECTED_WEAPON: Button  # value = <Button.DROP_SELECTED_WEAPON: 33>
 FRAGCOUNT: GameVariable  # value = <GameVariable.FRAGCOUNT: 3>
 GRAY8: ScreenFormat  # value = <ScreenFormat.GRAY8: 8>
+GRAY8_FLASHED: ScreenFormat  # value = <ScreenFormat.GRAY8_FLASHED: 18>
 HEALTH: GameVariable  # value = <GameVariable.HEALTH: 9>
 HITCOUNT: GameVariable  # value = <GameVariable.HITCOUNT: 5>
 HITS_TAKEN: GameVariable  # value = <GameVariable.HITS_TAKEN: 6>
@@ -3167,7 +3229,9 @@ RES_800X450: ScreenResolution  # value = <ScreenResolution.RES_800X450: 19>
 RES_800X500: ScreenResolution  # value = <ScreenResolution.RES_800X500: 20>
 RES_800X600: ScreenResolution  # value = <ScreenResolution.RES_800X600: 21>
 RGB24: ScreenFormat  # value = <ScreenFormat.RGB24: 1>
+RGB24_FLASHED: ScreenFormat  # value = <ScreenFormat.RGB24_FLASHED: 11>
 RGBA32: ScreenFormat  # value = <ScreenFormat.RGBA32: 2>
+RGBA32_FLASHED: ScreenFormat  # value = <ScreenFormat.RGBA32_FLASHED: 12>
 ROLL: GameVariable  # value = <GameVariable.ROLL: 42>
 SECRETCOUNT: GameVariable  # value = <GameVariable.SECRETCOUNT: 2>
 SELECTED_WEAPON: GameVariable  # value = <GameVariable.SELECTED_WEAPON: 15>
